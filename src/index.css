@@ -1,0 +1,15 @@
+body{
+    /* background-image:url('./Images/תמונה5.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+ }
+ #x{
+    color:green;
+    display: inline-block
+    }
+   
+   .ui.form .field .ui.input, .ui.form .fields .field .ui.input, .ui.form .wide.field .ui.input {
+       width: 100%;
+       right: -2vw;
+   }

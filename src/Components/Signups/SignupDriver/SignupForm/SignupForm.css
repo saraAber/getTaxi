@@ -1,0 +1,73 @@
+
+
+   
+       /* inputs */
+       .ui.form .field .ui.input input, .ui.form .fields .field .ui.input input{
+           text-align: right;
+           border: inset;
+           border-color: #bdbcb7;
+           border-radius: 0.7vw; 
+       }
+       /* dopdown */
+       .ui.fluid.dropdown {
+           display: block;
+           width: auto;
+           height: min-content;
+           min-width: 0px;
+       }
+   
+       .ui.search.dropdown > .text{
+           cursor: text;
+           position: relative;
+           right: -4vw;
+           z-index: 3;
+       }
+       .ui.selection.dropdown .menu > .item {
+           right: -6vw;
+           border-top: 1px solid rgb(250, 250, 250);
+           white-space: normal;
+           overflow-wrap: normal;
+           padding: 0.785714rem 1.14286rem !important;
+       }
+       .drop{
+           right: -2vw;
+       }
+   
+       .ui.column.grid > [class*="ten wide"].column, .ui.grid > .column.row > [class*="ten wide"].column, .ui.grid > .row > [class*="ten wide"].column, .ui.grid > [class*="ten wide"].column {
+           width: 56.5% !important;
+           right: -4vw;
+       }
+     /* submit button */
+       .submit{
+           margin: 1vw;
+           right: -8vw;
+           border: outset;
+           background-color: #e60a0ab3;
+           border-radius: 1vw;
+       }
+       /* button img */
+       .ui.button, .ui.buttons .button, .ui.buttons .or {
+           margin: 2vh;
+           margin-left: 3vw;
+           margin-top: 1vh;
+           font-size: 1rem;
+           top: 5vw;
+           right: 9vw;
+           display: grid;
+       }
+       .ui.stacked.segment{
+       background-color: #e3e8e896;
+       border-radius: 5vw;}
+       
+       /* grid */
+       .MuiGrid-root {
+           width: 55vw;
+           text-align: center;
+           /* align-items: center; */
+           margin: auto;
+       }
+       .MuiGrid-align-items-xs-center {
+           align-items: center;
+           height: 48vh;
+           margin-top: 8vw;
+       }
