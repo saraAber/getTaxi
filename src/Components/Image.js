@@ -42,7 +42,7 @@ class Upload extends Component {
       <div className="image">
         <input type="file"  onChange={this.fileChangedHandler} style={{display:"none"}} ref={fileInput=>this.fileInput=fileInput}/>
         <Button type="button" onClick={()=>this.fileInput.click()}>בחר תמונה</Button>
-      {this.state.img?<img src={this.state.file}  style={{"height":80, "width":60, "borderRadius": 50,
+      {this.state.img?<img src={this.state.file} alt="alt"  style={{"height":80, "width":60, "borderRadius": 50,
     "margin-left": "5vw"}} />:null}
       </div>
     );

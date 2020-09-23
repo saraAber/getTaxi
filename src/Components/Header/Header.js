@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import { withRouter } from "react-router";
-import classes  from './Header.css';
 import '../Header/Header'
 
 
