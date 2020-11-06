@@ -7,11 +7,11 @@ export const orderfunc = (order) => {
 
     return dispatch => {
         dispatch({ type: loading })
-        axios.post('http://localhost:50130/api/PostOrder', order)
+        axios.post('http://localhost:83/api/PostOrder', order)
             .then(x => {
                 const Order = { ...x.data }
                 dispatch({ type: updateorder, Neworder: Order })
-                axios.post('http://localhost:50130/api/PostDrivers', Order).then(x => {
+                axios.post('http://localhost:83/api/PostDrivers', Order).then(x => {
                     const drivers = { ...x.data }
                     dispatch({ type: listdrivers, Drivers: drivers })
                 }).catch(err => {
@@ -35,7 +35,7 @@ export const orderfunc = (order) => {
 }
 export const calculateprice = (Order) => {
     return dispatch => {
-        axios.post('http://localhost:50130/api/Calculatingprice', Order).then(x => {
+        axios.post('http://localhost:83/api/Calculatingprice', Order).then(x => {
             const NewOrder = { ...x.data }
             dispatch({ type: order, Neworder: NewOrder })
 
@@ -62,7 +62,7 @@ export const src_image = (srcfile) => {
 //Checks if the order has been confirmed
 export const OrderConfirmed = (Ord_Kod) => {
     return dispatch => {
-      axios.get(`http://localhost:50130/api/IsOrderConfirmed?KodOrder=${Ord_Kod}`).then(x => {
+      axios.get(`http://localhost:83/api/IsOrderConfirmed?KodOrder=${Ord_Kod}`).then(x => {
         const order = { ...x.data }
         if (order.DTO_Stattus === 1||order.DTO_Stattus === 0)
           dispatch({ type: error_message, value: "ממתין לאישור נהג" })

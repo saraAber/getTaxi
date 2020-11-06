@@ -20,7 +20,7 @@ class ModalExampleTopAligned extends Component {
     }
     checked = (Id) => {
         const Order = { ...this.props.order };
-        axios.put(`http://localhost:50130/api/DriverToOrder?IdDriver=${Id}&IdOrder=${Order.Ord_Kod}`).then(x => {
+        axios.put(`http://localhost:83/api/DriverToOrder?IdDriver=${Id}&IdOrder=${Order.Ord_Kod}`).then(x => {
         })
     }
 
