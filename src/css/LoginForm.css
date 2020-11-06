@@ -1,0 +1,75 @@
+/* body{
+    /* background-image: url("./images/delivery-man-smiling-holding-cardboard-box_1150-8869.jpg"); */
+    /* background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1.5)), url("../images/delivery-man-smiling-holding-cardboard-box_1150-8869.jpg") !important;
+    background-size: cover;
+    background-position-x: center;
+    background-repeat: no-repeat;
+} */ 
+.message{
+    color: #db2828;
+}
+a{
+    color:rgb(219 40 40);
+}
+a:hover {
+    color: #847f7f;
+    text-decoration: none;
+}
+#input-with-icon-grid{
+    font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    outline: 0px;
+    appearance: none;
+    line-height: 1.21429em;
+    padding: 0.678571em 1em;
+    font-size: 1em;
+    background: rgba(255, 255, 255, 0.01);
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: transparent 0px 0px 0px 0px inset;
+    border:0;
+    text-align:right;
+    right:0
+}
+/* .MuiInputLabel-formControl{
+    top: 0;
+    left: -97px;
+    position: absolute;
+    transform: translate(0, 24px) scale(1);
+} */
+#MuiGrid-root-login{
+    width: 64vw;
+    text-align: center;
+    /* align-items: center; */
+    margin-top: 24vw;
+    margin-left: -4vw;
+    }
+    .MuiInputLabel-formControl {
+        top: 0;
+        left: 123px;
+        position: absolute;
+        transform: translate(0, 24px) scale(1);
+    }
+    .MuiFormLabel-root{
+        right: -41vw;
+        }
+    .ui.stacked.segment:after, .ui.stacked.segment:before, .ui.stacked.segments:after, .ui.stacked.segments:before {
+        content: '';
+        /* position: absolute; */
+        /* bottom: -3px; */
+        /* left: 0; */
+        /* border-top: 1px solid rgba(34,36,38,.15); */
+        /* background: rgba(0,0,0,.03); */
+        width: 80%;
+        /* height: 6px; */
+        /* visibility: visible; */
+    }
+    
+    /* submit button */
+  #login {
+    right: 17vw;
+    border: groove;
+    background-color: #e60a0ab3;
+    border-radius: 2vw;
+    height: 5.2vh;
+    margin-top: 4vw;
+    width: 44vw;
+}

@@ -4,19 +4,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
-
+ import Grid from '@material-ui/core/Grid';
+ import '../../../css/LoginForm.css'
 
 class loginForm extends Component {
   render() {
     let messages
     let err
     return (
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-        <Grid  class="MuiGrid-root">
-          <Header as='h2' color='red' textAlign='center'>
-            כניסה לחשבונך
+      <Grid textalign='center' style={{ height: '100vh' }} verticalalign='middle' >
+        <Grid   id="MuiGrid-root-login"  >
+          <Header as='h2' color='red' textalign='center'>
+            התחבר לחשבונך
       </Header>
           <Form size='large' onSubmit={(event) => this.props.submit(event)}>
             <Segment stacked>
@@ -25,28 +24,26 @@ class loginForm extends Component {
                   if (this.props.messages) { !x.config.valid ? messages = <p key={i}>{x.config.message}</p> : messages = <p>{null}</p> }
                     err = <p key={i}>{this.props.error}</p>
                   return (<div key={i}>
-                  <TextField
+                    <TextField
                      id="input-with-icon-grid" 
                       color="secondary"
                       key={x.id}
-                        // fluid icon={x.config.icon}
-                        // iconPosition='left'
                         label={x.config.placeholder}
                         placeholder={x.config.placeholder}
                         type={x.config.type}
                         onChange={(event) => this.props.changed(event, x.id)}
                         value={x.config.value}
                         required={true}
-                        title={x.config.title}       
+                        title={x.config.title}                               
           ></TextField>
 
                     {messages}
                    
                   </div>)
-                })
+                }) 
               }
                {err}
-              <input type="submit" color='teal' value="התחבר" size='large' disabled={this.props.loading} />
+              <input id="login" type="submit" color='red' value="התחבר" size='large' disabled={this.props.loading} />
             </Segment>
           </Form>
 

@@ -13,7 +13,6 @@ export function GetCarsType() {
     return option;
   }).catch(err => {
     if (err.message === "Network Error") {
-      console.log("ffff")
       throw new Error( "בעיה במערכת, נסה מועד מאוחר יותר");
     }
     if (err.response) {
@@ -25,9 +24,11 @@ export function GetCarsType() {
 
 
 //update duration of destination in order
-export function UpdateDurationOrder() {
+export function UpdateDurationOrder(id) {
+ 
   return axios.put(`http://localhost:50130/api/PutUpdateDurationOrder?DriverId=${sessionStorage.getItem("userId")}`).then(x => {
-  }).catch(err => {
+ 
+}).catch(err => {
     if (err.message === "Network Error") {
       throw new Error("בעיה במערכת, נסה מועד מאוחר יותר");
     }
@@ -93,18 +94,7 @@ export function CustomerOrder(Cust_send) {
   })
 }
 
-//update busy driver 
-export const ChangeBusyDriver = () => {
-  return axios.put(`http://localhost:50130/api/putbusydriver?kodDriver=${sessionStorage.getItem("userId")}`).then(x => {
-  }).catch(err => {
-    if (err.message === "Network Error") {
-      throw new Error("בעיה במערכת, נסה מועד מאוחר יותר");
-    }
-    if (err.response) {
-      throw new Error( err.response.data.Message);
-    }
-  })
-}
+
 
 //update status of order
 export const StatusOrder = (order) => {
@@ -146,9 +136,3 @@ export function AllOrdersByDrivers() {
 }
 
 
-// export function NextDriver (IdOrder) {
-//   return axios.put(`http://localhost:50130/api/nextDriver?IdDriver=${sessionStorage.getItem("userId")}&IdOrder=${IdOrder}`).then(x => {
-//     console.log(x)
-
-//   })
-// }

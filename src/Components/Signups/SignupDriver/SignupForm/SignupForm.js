@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import {  Form, Grid, Header,  Segment} from 'semantic-ui-react'
-import { Dropdown ,Button,TransitionablePortal} from 'semantic-ui-react'
-import Image from '../../../Image'
-import './SignupForm.css'
-
+import {  TransitionablePortal, Dropdown, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import Image from '../../../../Image'
+import '../../../../css/Form.css'
 class signinForm extends Component {
-  state = { open: false, flag: false }
+  state = { open: false, flag: false,src:null }
 
   handleClick = () => {
     if (this.props.IsCorrect)
@@ -14,46 +12,48 @@ class signinForm extends Component {
   handleClose = () => this.setState({ open: false })
   componentDidUpdate() {
     if (!this.state.open && this.props.IsCorrect && !this.state.flag) {
-      this.setState({ open: true,flag: true })
+      this.setState({ open: true, flag: true })
     }
   }
+   
   render() {
+
     const { open } = this.state
-    let message
     let err
     return (
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-        <Grid.Column style={{ maxWidth: 450, top: "-3vw"  }}>
-          <Header as='h2' color='teal' textAlign='center'>
+
+
+      <Grid style={{ height: '100vh', "textAlign": 'center' }} verticalalign='middle'>
+        <Grid.Column style={{ maxWidth: "293px", top: "7vw", direction: "rtl", right: "-9vw" }}>
+          <Header as='h2' id="header" textalign='center'>
             {this.props.value}
           </Header>
           <Form size='large' onSubmit={(event) => this.props.submit(event)}>
-            <Segment stacked className="grid">
+            <Segment stacked >
               {
                 this.props.stateProps.map((x, i) => {
-                  if (this.props.messages) { !x.config.valid ? message = <p key={i}>{x.config.message}</p> : message = <p>{null}</p> }
                   if (this.props.err !== "")
                     err = <p key={i}>{this.props.error}</p>
+                 
                   return (
-                    <div key={i} className={x.config.className}>
+                    <div key={i} className={ ` ${x.config.className} ${!x.config.valid ? this.props.inputClass:''}`}>
                       <Form.Input
                         key={x.id}
                         placeholder={x.config.placeholder}
                         fluid icon={x.config.icon}
-                        iconPosition='right'
                         type={x.config.type}
                         onChange={(event) => this.props.changed(event, x.id)}
                         value={x.config.value}
                         required={true}
                         title={x.config.title}
                       />
-                      {message}
                     </div>
                   )
                 })
               }
               <Dropdown
                 className="seven wide column drop"
+                id="cartype"
                 placeholder='בחר כלי רכב'
                 fluid
                 search
@@ -62,18 +62,21 @@ class signinForm extends Component {
                 required
                 onChange={this.props.changeoption}
               />
-              <p> {this.props.messageCar} </p>
               {err}
-              <Image src={this.props.srcimage}></Image> 
-              {this.props.button ? <Button
-                content={open ? 'התעדכן' : 'עדכן פרטים'}
-                negative={open}
-                positive={!open}
+              <Image isShowpicture={this.props.Showpicture} srcimage={this.props.srcimage}></Image>
+              
+
+              {this.props.button ? <input id="submit" type="submit"
+
                 onClick={this.handleClick}
-              /> : <input className="seven wide column submit" disabled={this.props.loading} value={this.props.value} type="submit" color='teal' size='large' />}
+                value={open ? 'התעדכן' :'עדכן פרטים'}
+              /> : <input className="seven wide column " id="submit" disabled={this.props.loading} value={this.props.value} type="submit" color='teal' size='large' />}
+              
               <TransitionablePortal onClose={this.handleClose} open={open}>
+           
+
                 <Segment
-                  style={{color:"red", left: '40%', position: 'fixed', top: '50%', zIndex: 1000 }}>
+                  style={{ color: "red", left: '24vw', position: 'absolute', top: '50%', zIndex: 1000 }}>
                   <Header>עדכון פרטים חדשים</Header>
                   <p>!הפרטים עודכנו בהצלחה</p>
                 </Segment>

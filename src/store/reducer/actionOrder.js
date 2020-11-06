@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { order, listdrivers, updateorder, loading, error_message, orderpath } from '../action'
+import { order, listdrivers, updateorder, loading, error_message, orderpath,src } from '../action'
 
 
 export const orderfunc = (order) => {
@@ -51,6 +51,14 @@ export const pathorder = (order) => {
         dispatch({ type: orderpath, orderpath: order })
     }
 }
+//update src image
+export const src_image = (srcfile) => {
+
+    return dispatch => {
+        dispatch({ type: src , src: srcfile})
+    }
+}
+
 //Checks if the order has been confirmed
 export const OrderConfirmed = (Ord_Kod) => {
     return dispatch => {

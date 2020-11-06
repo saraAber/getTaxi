@@ -4,8 +4,10 @@ import * as actionType from '../action'
 const initaliState = {
     loading: false,
     errorMassge: "",
+    src:"",
     order: null,
     Drivers:[],
+
     OrderPath: null
 }
 const reducerOrder = (state = initaliState, action) => {
@@ -46,9 +48,19 @@ const reducerOrder = (state = initaliState, action) => {
             return {
                 ...state,
                 loading: false,
-                errorMassge: action.value
+                errorMassge: "action.value"
+            }
+
+        }
+        case actionType.src: {
+         
+            return {
+                ...state,
+                src: action.src,
+                
             }
         }
+       
         default:
             return state;
     }

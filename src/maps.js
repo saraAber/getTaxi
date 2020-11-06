@@ -12,7 +12,7 @@ var service = platform.getSearchService();
 service.reverseGeocode({
   at: '52.5309,13.3847,150'
 }, (result) => {
-  result.items.forEach((item) => {
+  result.items.forEach((item) => { 
     // Assumption: ui is instantiated
     // Create an InfoBubble at the returned location with
     // the address as its contents:

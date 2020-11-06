@@ -4,13 +4,14 @@ import { GetCarsType } from '../../../store/reducer/actionServer/actionServer'
 import { signupdriver } from '../../../store/reducer/actionUser'
 import { connect } from 'react-redux';
 import {error_message} from '../../../store/action'
+import '../../../css/Form.css'
+
 
 class signupDriver extends Component {
     state = {
         src: null,
+        inputClass:"",
         optionCars: [],
-        messageCar: "",
-        messages: false,
         Driver: {
             firstName: {
                 type: "text",
@@ -19,10 +20,6 @@ class signupDriver extends Component {
                 icon: "user",
                 pattern: /^[\u0590-\u05FF ,.'-]+$/i,
                 valid: false,
-                message: "השם פרטי אינו תקין",
-                className:"seven wide column"
-
-
             },
             lastName: {
                 type: "text",
@@ -31,26 +28,27 @@ class signupDriver extends Component {
                 icon: "user",
                 pattern: /^[\u0590-\u05FF ,.'-]+$/i,
                 valid: false,
-                message: "שם משפחה אינו תקין",
-                className:"seven wide column"
+                message: "שם משפחה אינו תקין"
+                ,
+              
             },
             minway: {
                 type: "number",
                 placeholder: "מינימום מרחק",
                 value: "",
-                icon: "point",
+                icon: "road",
                 pattern: /^/,
                 valid: false,
-                className:"seven wide column"
+                className:" way"
             },
             maxway: {
                 type: "number",
                 placeholder: "מקסימום מרחק",
                 value: "",
-                icon: "point",
+                icon: "road",
                 pattern: /^/,
                 valid: false,
-                className:"seven wide column"
+                className:" way maxwaylogin"
             },
 
             phone: {
@@ -60,18 +58,16 @@ class signupDriver extends Component {
                 icon: "call",
                 pattern: /^\d{10}$/,
                 valid: false,
-                message: "מספר טלפון אינו תקין",
-                className:"seven wide column"
+               
             },
             email: {
                 type: "text",
                 placeholder: `דוא"ל`,
                 value: "",
-                icon: "wifi",
+                icon: "at",
                 pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                 valid: false,
-                message: "כתובת מייל אינה תקינה",
-                className:"seven wide column"
+       
             },
             password: {
                 type: "password",
@@ -82,16 +78,14 @@ class signupDriver extends Component {
                 icon: "lock",
                 pattern: /^.{8,}/,
                 title: "Eight or more characters",
-                valid: false,
-                message: "הסיסמה חייבת להכיל לפחות 8 תווים",
-                className:"ten wide column "
+                valid: false,          
             }
 
         },
         CarType: null,
     }
     //Displays a list of type cars 
-    async componentWillMount() {
+    async UNSAFE_componentWillMount() {
         GetCarsType().then(x => {
             this.setState({ optionCars: x })
         }).catch(x => {
@@ -99,31 +93,24 @@ class signupDriver extends Component {
                     
         })
 
-        //        console.log(x)
-        //   const option=await GetCarsType()
-        //     axios.get('http://localhost:50130/api/Cars').then(x => {
-        //     const data = { ...x.data }
-        //     const option = []
-        //     for (let x in data) {
-        //       option.push({ key: data[x].Car_Kodtype, text: data[x].Car_Nametype, value: data[x].Car_Kodtype })
-        //     }
-        //     console.log(data)
-        //      this.setState({ optionCars: option })  
-        //   }).catch(x => {
-        //     alert("nnnot good")
-        //   })
     }
     //Checks all entered data properly
     validation = () => {
         this.setState({ validFile: false })
+        
         for (var x in this.state.Driver) {
             if (!this.state.Driver[x].valid) {
-                this.setState({ messages: true })
+                this.setState({
+                    inputClass: "invalid"
+                   })
                 if (this.state.CarType === null)
                     this.setState({ messageCar: "חייב לבחור כלי רכב" })
+                
                 return;
             }
+
         }
+    
         if (this.state.CarType !== null)
             this.setState({ messageCar: "" }, () => {
                 //post new customer
@@ -138,15 +125,19 @@ class signupDriver extends Component {
                     lat: null,
                     lon: null,
                     Dr_CarType_kod: this.state.CarType,
-                    Dr_Token: null,
+                    Dr_Token: this.props.src,
                     Dr_Password: this.state.Driver.password.value,
                     Dr_MaxWay: this.state.Driver.maxway.value,
                     Dr_MinWay: this.state.Driver.minway.value,
                 }
                 this.props.signup(data)
+
+
             })
+        
         else
             this.setState({ messageCar: "חייב לבחור כלי רכב" })
+          
     }
     //While clicking on signin comes to this function
     submit = () => {
@@ -166,21 +157,26 @@ class signupDriver extends Component {
         formChange.value = event.target.value;
         if (formChange.pattern.test(String(formChange.value).toLowerCase())) {
             formChange.valid = true
+           
         }
         else
+     
             formChange.valid = false
+           
         newform[id] = formChange;
         this.setState({ Driver: newform });
-    }
-       //update the src image
-       srcimage = (event, data) => {
-        this.setState({ src: event })
-        console.log("state:" + event)
     }
     //update the car type in state
     selectoption = (event, data) => {
         this.setState({ CarType: data.value })
         this.setState({ messageCar: "" })
+    }
+      //update the src image
+      srcimage = (event, data) => {
+        
+
+        this.setState({ src: event })
+     
     }
     render() {
         const arr = [];
@@ -194,15 +190,13 @@ class signupDriver extends Component {
                     stateProps={arr}
                     changed={this.inputChange}
                     submit={this.submit}
-                    value="הירשם"
+                    value="הירשם כנהג"
                     optionCars={this.state.optionCars}
                     changeoption={this.selectoption}
                     loading={this.props.loading}
-                    messages={this.state.messages}
-                      error={this.props.errMas}
-                    messageCar={this.state.messageCar}
-                    srcimage={this.srcimage}
-
+                    error={this.props.errMas}
+                    inputClass={this.state.inputClass}
+                    Showpicture={false}
                 />
             </div>)
     }
@@ -218,7 +212,8 @@ const mapStateToProps = state => {
         user: state.user.User,
         userpath: state.user.UserPath,
         loading: state.user.loading,
-        errMas: state.user.errorMassge
+        errMas: state.user.errorMassge,
+        src:state.order.src
     }
 }
 export default connect(mapStateToProps, mapDispatcToProps)(signupDriver);

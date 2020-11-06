@@ -157,3 +157,20 @@ export const refreshdriver = (Id) => {
         })
     }
 }
+//update busy driver 
+
+export const ChangeBusyDriver = () => {
+    return dispatch => {
+         axios.put(`http://localhost:50130/api/putbusydriver?kodDriver=${sessionStorage.getItem("userId")}`).then(x => {
+            const driver= {...x.data}
+            dispatch({ type: login, user: driver })
+            
+        }).catch(err => {
+        if (err.message === "Network Error") {
+        throw new Error("בעיה במערכת, נסה מועד מאוחר יותר");
+         }
+        if (err.response) {
+        throw new Error( err.response.data.Message);
+        }})
+    }
+  }

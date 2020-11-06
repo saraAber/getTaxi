@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { leave } from '../../store/reducer/actionUser'
+import '../../css/Logout.css'
 class logout extends Component {
 
   componentDidMount() {
     setTimeout(() => {
       this.props.logout();
       this.props.history.replace('/')
-      // return '/'
     }, 2000)
 
   }
   render() {
     return (
-    <div>
-      <div>!תודה רבה</div>
-      <div>...ולהתראות</div>
+      <div className="all">
+      <div className="shadow">תודה  </div>
+      <div className="shadow"> ויום טוב  </div>
       </div>
     )
   }

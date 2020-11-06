@@ -1,0 +1,38 @@
+#status{
+    position: absolute;
+    top: 2vw;
+    color: #f9f9f9;
+    right: 73vw;
+    text-align: center;
+}
+
+
+label {
+    color: #e69191;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.ui.toggle.checkbox .box:before, .ui.toggle.checkbox label:before {
+    display: block;
+    position: absolute;
+    content: '';
+    z-index: 1;
+    transform: none;
+    border: none;
+    top: 0;
+    background: red;
+    box-shadow: none;
+    width: 3.5rem;
+    height: 1.5rem;
+    border-radius: 500rem;
+}
+.ui.toggle.checkbox input:focus~.box:before, .ui.toggle.checkbox input:focus~label:before {
+    background-color: red;
+    border: none;
+}
+.ui.toggle.checkbox .box:hover::before, .ui.toggle.checkbox label:hover::before {
+    /* background-color: rgb(177 178 199); */
+    border: none;
+    background: red;
+}

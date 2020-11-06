@@ -1,0 +1,113 @@
+.Driverorders{
+    font-family: cursive;
+    /* border-color: skyblue; */
+    /* border: #635757; */
+    text-align: right;
+    direction: rtl;
+    width: 94vw;
+    margin: 3vw;
+    /* height: 33vh; */
+    /* height: 43vh; */
+    /* border: ridge; */
+    /* border-color: crimson; */
+    /* border-radius: 12%; */
+    background-color: #ababab73;
+}
+/* #x{
+    position: absolute;
+    margin-right: 57vw;
+    margin-top: -8vw;
+    background-color: red;
+    
+    
+}
+#v{
+    position: absolute;
+
+    margin-right: 15vw;
+    margin-top: -8vw;
+    background-color: red;
+    /* width: 15vw; */
+   
+    /* height: 10vh;*/
+    
+/* } */ 
+#button_v{
+    /* border: groove; */
+    /* background-color: #e60a0ab3; */
+    border-radius: 3vw;
+    height: 11vw;
+    width: 38vw;
+    background-color: #36ab368f;
+    border: groove 2px;
+    /* border: solid; */
+    /* border-color: #0080007d;*/
+}
+#header{
+    text-align: center;
+ color:#d85d5d
+}
+#button_x{
+    border-radius: 3vw;
+    height: 11vw;
+    width: 38vw;
+    background-color: #e45151;
+    border: groove 2px;
+    width: 40vw;
+    /* background-color: #7873a9; */
+    /* border: solid 2px; */
+    /* border: solid; */
+    /* border-color: #ff000080;*/
+
+}
+#icon_from{
+    font-size: 11px;
+    color:#e23939;
+}
+#icon_to{
+    font-size: 11px;
+    color:#151596;
+}
+#source_address{
+    font-size: 14px;
+    width: 86vw;
+    border-bottom: groove 2px;
+}
+#title{
+    font-family: system-ui;
+    color: #296d3b;
+    font-size: 18px;
+    margin: 3vw;
+    text-align: center;
+}
+
+.Customerorders{
+   /* background-color: #fff; */
+    border: solid 1px #fff;
+    /* box-shadow: inset 60px 0 120px #c55050, inset -60px 0 120px #d0d0d0; */
+    font-family: cursive;
+    /* border-color: skyblue; */
+    /* border: #635757; */
+    text-align: right;
+    direction: rtl;
+    width: 89vw;
+    margin: 5vw;
+    /* height: 33vh; */
+    /* height: 43vh; */
+    /* border: ridge; */
+    /* border-color: crimson; */
+    /* border-radius: 12%; */
+    background-color: #ababab7a;
+}
+.center{
+    text-align: center;
+}
+.num_order{
+    height: 11vw;
+    text-align: end;
+    font-size: 50px;
+    /* position: absolute; */
+    /* top: 83vw; */
+    /* right: 61vw; */
+    opacity: 0.2;
+}

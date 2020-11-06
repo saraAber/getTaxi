@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TickTackBuilder from './containers/TickTackBuilder';
 import { Router } from "react-router-dom";
 import history from "./containers/his";
+import './App.css'
 class App extends Component {
  
   render() {
@@ -9,7 +10,7 @@ class App extends Component {
     return (
       <Router history={history}>
       <div>
-        <TickTackBuilder />
+        <TickTackBuilder  />
       </div></Router>
     );
   }

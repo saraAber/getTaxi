@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Rating } from 'semantic-ui-react';
-import { CustomerOrder, ChangeBusyDriver, StatusOrder } from '../../../../store/reducer/actionServer/actionServer'
-
+import { CustomerOrder, StatusOrder } from '../../../../store/reducer/actionServer/actionServer'
+import '../../../../css/DriverOrders.css';
 
 class myorder extends Component {
     state = {
@@ -15,11 +15,12 @@ class myorder extends Component {
         pointCustomer: 0
     }
     //Returns customer for each order and update the state
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const order = { ...this.props.order }
         CustomerOrder(order.Cust_send).then(x => {
+
             this.setState({
-                pointCustomer: x.Cust_Points,
+                pointCustomer: x.Cust_Points>20?5:x.Cust_Points>10?4:x.Cust_Points,
                 nameCustomer: x.Cust_FirstName + " " + x.Cust_LastName,
                 phoneCustomer: x.Cust_PhoneNumber,
                 floorCustomer: x.Cust_Floor
@@ -29,8 +30,8 @@ class myorder extends Component {
         switch (order.Ord_Stattus) {
             case 1:
                 {
-                    this.setState({ title: "הזמנה ממתינה לאישורך" })
-                    this.setState({ cancelButton: <Button type="submit" onClick={() => this.props.onclick(order.Ord_Kod)} >איני מעוניין</Button> })
+                    this.setState({ title: "  קבל" })
+                    this.setState({ cancelButton: <Button id="button_x" type="submit" onClick={() => this.props.onclick(order.Ord_Kod)} >  דחה</Button> })
                     this.setState({ text: 1 })
                     break;
                 }
@@ -41,12 +42,12 @@ class myorder extends Component {
                     break;
                 }
             case 3: {
-                this.setState({ title: "הזמנה הגיעה ליעדה" })
+                this.setState({ title: "הגיעה ליעד" })
                 this.setState({ text: 3 })
                 break;
             }
             case 4: {
-                this.setState({ title: "הזמנה הגיעה ליעדה" })
+                this.setState({ title: "הגיעה ליעד" })
                 this.setState({ text: 4 })
                 this.setState({ disabled: true })
                 break;
@@ -58,7 +59,7 @@ class myorder extends Component {
     }
     //When you click the button the status will change
     switchcasebutton = () => {
-       const number=this.state.text;
+        const number = this.state.text;
         let title
         switch (number) {
             case 2:
@@ -68,33 +69,34 @@ class myorder extends Component {
                     break;
                 }
             case 3: {
-                title = "הזמנה הגיעה ליעדה"
+                title = "הגיעה ליעד"
                 break;
             }
             default: {
-                title = "הזמנה הגיעה ליעדה"
+                title = "הגיעה ליעד"
                 this.setState({ disabled: true })
                 break;
             }
         }
-        // this.state.title = title
+        
 
         return title
-        // this.state.text = number
-        // this.setState({ text: number })
+      
 
     }
     //When you click the button the status will change in the data
     switchcaseServer = () => {
-      const  number=this.state.text;
-      console.log(number)
+        const number = this.state.text;
         let order = { ...this.props.order }
         switch (number) {
             case 2:
                 {
+
                     order.Ord_Stattus = 2
                     order.Ord_Id_driver = sessionStorage.getItem("userId")
-                    ChangeBusyDriver()
+                 
+                    this.props.ChangeDriver()
+                    
                     break;
                 }
             case 3:
@@ -104,39 +106,47 @@ class myorder extends Component {
                 }
             case 4:
                 {
+
                     order.Ord_Stattus = 4
-                    ChangeBusyDriver()
+                    this.props.ChangeDriver()
                     break;
                 }
             default:
                 break;
         }
 
-        StatusOrder(order)
+        StatusOrder(order);
+        
+        
     }
     //onclick button enter to this function
     onclick = () => {
-        this.setState({text: this.state.text + 1},
-            ()=>this.setState({title: this.switchcasebutton()},
-            ()=>this.switchcaseServer()))           
+        this.setState({ text: this.state.text + 1 },
+            () => this.setState({ title: this.switchcasebutton() },
+                () => this.switchcaseServer()))
+          
     }
 
     render() {
+
         return (
             <div>
                 {this.state.pointCustomer !== 0 ?
-                    <div>
-                        <div> <Rating defaultRating={this.state.pointCustomer} maxRating="5" disabled /> דירוג לקוח</div>
-                        <div>שם לקוח {this.state.nameCustomer}</div>
-                        <div>כתובת לקיחה {this.props.order.Cust_sourceAddress}</div>
-                        <div>קומה {this.state.floorCustomer}</div>
-                        <div>מספר טלפון לקוח {this.state.phoneCustomer}</div>
-                        <div>שם נמען {this.props.order.Cust_getName}</div>
-                        <div>כתובת ייעד {this.props.order.Cust_DesAddress}</div>
-                        <div>קומה {this.props.order.Cust_getfloor}</div>
-                        <div>מספר טלפון נמען {this.props.order.Cust_getPhone}</div>
-                        <Button type="submit" disabled={this.state.disabled} onClick={this.onclick} >{this.state.title}</Button>
+                    <div className="Driverorders">
+                     
+                        <div id="source_address"><i id="icon_from"  className="map marker alternate icon"></i> <b>איסוף- </b>{this.props.order.Cust_sourceAddress} <b>  קומה </b> {this.state.floorCustomer}</div>
+                     
+                        <div><i id="icon_to" className="map marker alternate icon"></i> <b>מסירה- </b> {this.props.order.Cust_DesAddress} <b> קומה, </b>{this.props.order.Cust_getfloor}</div>
+
+                        <div><b>שם לקוח: </b>{this.state.nameCustomer}</div>
+                        <div><b>מספר טלפון לקוח: </b>{this.state.phoneCustomer}</div>
+                        <div className="">לקוח ותיק <Rating defaultRating={this.state.pointCustomer} maxRating="5" disabled /> </div>
+                        <div><b>שם נמען:</b> {this.props.order.Cust_getName}</div>
+                        <div><b>מספר טלפון נמען: </b>{this.props.order.Cust_getPhone}</div>
+                        <div className="center">
+                        <Button id="button_v" type="submit" disabled={this.state.disabled} onClick={this.onclick} >{this.state.title}</Button>
                         {this.state.cancelButton}
+                        </div> 
                     </div> : null}</div>
         )
     }

@@ -1,60 +1,71 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from "react-router";
-import '../Header/Header'
+import SlideDrawer from './Slide.js'
+import Backdrop from './Backdrop.js'
+import '../../css/Header.css'
 
 
 class header extends Component {
-    render() {
+    state = { drawerOpen: false }
+    drawerToggleClickHandler = () => {
+        this.setState({
+            drawerOpen: !this.state.drawerOpen
+        })
+    }
+    backdropClickHandler = () => {
+        this.setState({
+            drawerOpen: false
+        })
+    }
 
+    render() {
         const user = { ...this.props.user }
         let userName;
+
+
         const pathname = this.props.history.location.pathname;
-        let header =<div className="header_up"></div>
-
-        if (pathname === "/customer/order" || pathname === "/customer/ordertracking" || pathname === "/customer/update" || pathname === "/customer/myorders") {
-            userName = user.Cust_FirstName
-            header = <div className="header_up" > 
-            <NavLink to="/customer/ordertracking" >Order Tracking</NavLink>
-            <NavLink to="/customer/update">Update details</NavLink>
-            <NavLink to="/customer/order" >Order</NavLink>
-            <NavLink className="log_out" to="/customer/logout" >Log Out</NavLink>
-            <NavLink  to="/customer/myorders">My Orders</NavLink>
-            <h1 >שלום {userName}</h1>
-            </div>
+        let links = <div></div>
+        let logo = <div> </div>
+        let hello = <div></div>
+        if (pathname === "/") {
+            links = <div >  <div className="link_cu" ><NavLink exact to='/customer'>היכנס כלקוח</NavLink></div>
+                <div className="link_dr"> <NavLink exact to='/driver'>היכנס כנהג</NavLink></div></div>
+            logo = <div id="ticktack"></div>
         }
-        else
-            if ((pathname === "/customer/login" || pathname === "/driver/login" || pathname === "/customer/signup" || pathname === "/driver/signup"))
-            header = <ul><li><NavLink exact to='/customer'>היכנס כלקוח</NavLink></li>
-            <li><NavLink exact to='/driver'>היכנס כנהג</NavLink></li></ul>
-            else
-                if (pathname === "/driver/update"||pathname==="/driver/myorders") {
-                    userName = user.Dr_FirstName
-                    header = <div className="header_up"> 
-                    <NavLink to="/driver/myorders">My Orders</NavLink>
-                    <NavLink to="/driver/update">Update Details</NavLink>
-                    <NavLink className="log_out" to="/driver/logout">Log Out</NavLink>
-                    <h1 >שלום {userName}</h1>  </div>
-                }
-                else
-                    if (pathname === "/") {
-                        //Checks the type of user so that he does not enter the main page every time
-                        if (localStorage.getItem('UserType'))
-                            if (localStorage.getItem('UserType') === "customer")
-                                header = <div className="header_up">
-                                <Redirect path="/" to="/customer" />   </div>
-                            else
-                                header = <div className="header_up">
-                                <Redirect path="/" to="/driver" />   </div>
-                        else
-                            header = <div className="header_up">
-                            <NavLink exact to='/customer'>היכנס כלקוח</NavLink>
-                            <NavLink exact to='/driver' >היכנס כנהג</NavLink>   </div>
-                    }
+        if (pathname === "/driver/update" || pathname === "/driver/myorders") {
+            userName = user.Dr_FirstName
+            hello = <div id="hello_to"> היי {userName}</div>;
+        }
+        else if (pathname === "/customer/order" || pathname === "/customer/ordertracking" || pathname === "/customer/update" || pathname === "/customer/myorders") {
+            userName = user.Cust_FirstName
+            hello = <div id="hello_to"> היי {userName}</div>;
+        }
 
 
-        return (<nav> {header}</nav>)
+        let backdrop;
+        if (this.state.drawerOpen) {
+            backdrop = <Backdrop close={this.backdropClickHandler} />;
+        }
+
+
+
+        return (<nav className="nav">
+
+            <div>
+                <div>
+                    < SlideDrawer show={this.state.drawerOpen} />
+
+                    {backdrop}
+
+                </div>
+
+                <button id="button_menu" onClick={this.drawerToggleClickHandler}>  <i id="icon_menu" className="sidebar icon"></i> </button>
+                {hello}
+                {links}
+                {logo}
+            </div></nav>)
     }
 }
 

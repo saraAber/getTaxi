@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import {AllOrders} from '../../../store/reducer/actionServer/actionServer'
 import { refreshcustomer } from '../../../store/reducer/actionUser'
 import {error_message} from '../../../store/action'
+import {Header} from 'semantic-ui-react';
+
 class myorders extends Component {
     state = {
         orders: []
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         //return customer after refresh page 
          this.props.refreshpage(sessionStorage.getItem("userId"))
          //Returns all orders placed by the customer
@@ -23,6 +25,8 @@ class myorders extends Component {
         const order = this.state.orders.map(x => <MyOrder key={x.Ord_Kod} order={x} />)
         return (
             <div>
+                  <Header id="header" as='h2'  textalign='center'>ההזמנות שלי </Header>       
+
                 {this.props.errMas}
                 {order}
             </div>

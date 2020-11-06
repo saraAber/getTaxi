@@ -7,9 +7,7 @@ import  thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {createStore,combineReducers, applyMiddleware} from 'redux'
 import rootReducer from './store/reducer/reducerUser'
-// import reducerOrder from './store/reducer/reducerOrder'
 import reducerOrder from './store/reducer/reducerOrder'
-import 'semantic-ui-css/semantic.min.css'
 
 const combin=combineReducers({
     user:rootReducer,

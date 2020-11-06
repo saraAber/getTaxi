@@ -1,0 +1,27 @@
+#address{
+    margin-right: 1vw;
+    text-align: right;
+    border: solid 5;
+    border-color: #bdbcb7;
+    border-radius: 2.7vw;
+    width: 121%;
+    margin-left: 0vw;
+    width: 66vw;
+    /* margin-top: 0vw; */
+    /* margin-bottom: 0vw;*/
+}
+#seggestions_ul{
+    /* border-left: 1px solid red;
+    border-right: 1px solid red;
+    border-bottom: 2px solid red; */
+    text-align: right;
+    background-color: #ffe7e7;
+    position: absolute;
+    z-index: 1;
+    border-radius: 3%;
+    
+    width: 81vw;
+    }
+    #p{
+        margin-right: -10vw;
+    }

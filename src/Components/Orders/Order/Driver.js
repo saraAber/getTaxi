@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Rating, Button, Header, Segment, TransitionablePortal, Loader } from 'semantic-ui-react'
+import '../../../css/Form.css'
 
 class driver extends Component {
     state = { open: false }
@@ -15,23 +16,25 @@ class driver extends Component {
     render() {
         const { open } = this.state
         return (
-            <div>
-                <div><Rating maxRating={5} defaultRating={this.props.driver.Dr_Points} disabled />:דירוג נהג</div>
-                <div> : שם נהג {this.props.driver.Dr_FirstName + "  " + this.props.driver.Dr_LastName}</div>
-                <div> בעוד {this.props.driver.DurationSource} דקות </div>
+            <div className="drivers">
+                <div className="inside_sut_drivers"><Rating className="rating" maxRating={5} defaultRating={this.props.driver.Dr_Points} disabled /></div>
+                <div  className="inside_sut_drivers" id="sut_driver_name">  {this.props.driver.Dr_FirstName + "  " + this.props.driver.Dr_LastName}</div>
+                <div className="inside_sut_drivers"> יגיע בעוד {this.props.driver.DurationSource} דקות </div>
+                <img className="img" src={this.props.driver.Dr_Token} id="img_driver" alt="" />
                 <Button
-                    content={open ? 'הבקשה נשלחה' : ' בקשת הזמנה מנהג זה '}
-                    negative={open}
-                    positive={!open}
+                id="button_request"
+                    content={open ? 'הבקשה נשלחה' : 'בקש הזמנה '}
+                  
                     disabled={this.props.disabled}
                     onClick={this.handleClick}
                 />
                 <TransitionablePortal onClose={this.handleClose} open={open}>
                     <Segment
-                        style={{ left: '40%', position: 'fixed', top: '50%', zIndex: 1000 }}
+                        style={{ left: '25%', position: 'fixed', top: '44%', zIndex: 1000 }}
                     >
                         <Loader active={this.props.active} inline='centered' />
-                        <Header>{this.props.value}</Header>
+                        <i  className="check curcle outline icon"></i>
+                        <Header   >{this.props.value}</Header>
 
                     </Segment>
                 </TransitionablePortal>

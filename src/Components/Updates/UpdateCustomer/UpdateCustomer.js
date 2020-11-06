@@ -5,15 +5,12 @@ import { connect } from 'react-redux';
 class signinCustomer extends Component {
     state = {
         open: false,
+        inputClass: "",
         setOpen: true,
-        optionCity: [],
         x: null,
-        City: null,
-        messages: false,
-        messageAddress: "",
         address_from: null,
         updateUser: false,
-        content:"הפרטים עודכנו בהצלחה",
+        content: "הפרטים עודכנו בהצלחה",
         IsCorrect: false,
         customer: {
             lastName: {
@@ -23,15 +20,15 @@ class signinCustomer extends Component {
                 icon: "user",
                 pattern: /^[\u0590-\u05FF ,.'-]+$/i,
                 valid: true,
-                message: "שם משפחה אינו תקין"
             },
             floor: {
                 type: "number",
-                placeholder: "קומה",
+                placeholder: "ק'",
                 value: "",
-                icon: "point",
+                // icon: "building",
                 pattern: /^/,
-                valid: true
+                valid: true,
+                id: "floor"
             },
             phone: {
                 type: "tel",
@@ -40,16 +37,14 @@ class signinCustomer extends Component {
                 icon: "call",
                 pattern: /^\d{10}$/,
                 valid: true,
-                message: "מספר טלפון אינו תקין"
             },
             email: {
                 type: "text",
                 placeholder: `דוא"ל`,
                 value: "",
-                icon: "wifi",
+                icon: "at",
                 pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                 valid: true,
-                message: "כתובת מייל אינו תקין"
             },
             password: {
                 type: "password",
@@ -60,12 +55,11 @@ class signinCustomer extends Component {
                 icon: "lock",
                 pattern: /^.{8,}/,
                 valid: true,
-                message: "הסיסמה חייבת להכיל לפחות 8 תווים"
             }
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.refreshpage(sessionStorage.getItem("userId"))
 
     }
@@ -74,32 +68,24 @@ class signinCustomer extends Component {
         this.setState({ validFile: false })
         for (var x in this.state.customer) {
             if (!this.state.customer[x].valid) {
-                this.setState({ messages: true })
-                if (this.state.address_from === null) {
-                    this.setState({ messageAddress: "חייב למלא כתובת" })
-                }
-                return;
+                this.setState({
+                    inputClass: "invalid"
+                })
+                return
             }
         }
-        if (this.state.address_from !== null) {
-
-            this.setState({ messageAddress: "" }, () => {
-                const data = {
-                    Cust_Kod: this.props.user.Cust_Kod,
-                    Cust_Floor: this.state.customer.floor.value,
-                    cust_Address: this.state.address_from,
-                    Cust_LastName: this.state.customer.lastName.value,
-                    Cust_Password: this.state.customer.password.value,
-                    Cust_PhoneNumber: this.state.customer.phone.value,
-                }
-                this.props.update(data)
-                this.setState({ IsCorrect: true })
-            })
+       
+        const data = {
+            Cust_Kod: this.props.user.Cust_Kod,
+            Cust_Floor: this.state.customer.floor.value,
+            cust_Address: this.state.address_from,
+            Cust_LastName: this.state.customer.lastName.value,
+            Cust_Password: this.state.customer.password.value,
+            Cust_PhoneNumber: this.state.customer.phone.value,
         }
-        else {
-
-            this.setState({ messageAddress: "חייב לבחור כתובת" })
-        }
+        this.props.update(data)
+        this.setState({ IsCorrect: true })
+       
     }
     //enter here after all letter and update if its correct
     inputChange = (event, id) => {
@@ -130,15 +116,17 @@ class signinCustomer extends Component {
             const user = { ...this.props.user }
             customer.lastName.value = user.Cust_LastName
             customer.password.value = user.Cust_Password
-            // customer.address_from=user.cust_Address
             customer.phone.value = user.Cust_PhoneNumber
             customer.floor.value = user.Cust_Floor
+            customer.email.value = user.Cust_Email
             this.setState({ customer: customer })
             this.setState({ updateUser: true })
+            this.setState({ address_from: user.Cust_Address })
         }
     }
+
     render() {
-       
+
         const arr = [];
         for (let x in this.state.customer) {
             arr.push({ id: x, config: this.state.customer[x] })
@@ -146,19 +134,18 @@ class signinCustomer extends Component {
         return (
             <div>
                 <Update
+                    address={this.state.address_from}
                     stateProps={arr}
                     changed={this.inputChange}
                     submit={this.submit}
-                    optionCity={this.state.optionCity}
                     changeoption={this.selectoption}
-                    messages={this.state.messages}
                     selectoptionfrom={this.selectoptionfrom}
-                    messagesAddress={this.state.messageAddress}
                     err={this.props.errMas}
                     loading={this.props.loading}
                     button={true}
                     IsCorrect={this.state.IsCorrect}
-                    value="עידכון פרטים"
+                    inputClass={this.state.inputClass}
+                    value="עדכון פרטים"
                 />
             </div>)
     }

@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 class signupCustomer extends Component {
     state = {
         City: null,
-        messages: false,
+        inputClass:"",
         address_from: null,
-        messageAddress:"",
         customer: {
             firstName: {
                 type: "text",
@@ -16,7 +15,7 @@ class signupCustomer extends Component {
                 icon: "user",
                 pattern: /^[\u0590-\u05FF ,.'-]+$/i,
                 valid: false,
-                message: "השם פרטי אינו תקין"
+
             },
             lastName: {
                 type: "text",
@@ -25,15 +24,15 @@ class signupCustomer extends Component {
                 icon: "user",
                 pattern: /^[\u0590-\u05FF ,.'-]+$/i,
                 valid: false,
-                message: "שם משפחה אינו תקין"
+
             },
             floor: {
                 type: "number",
-                placeholder: "קומה",
+                placeholder: "ק'",
                 value: "",
-                icon: "point",
                 pattern: /^/,
-                valid: false
+                valid: false,
+                id:"floor"
             },
             phone: {
                 type: "tel",
@@ -42,16 +41,16 @@ class signupCustomer extends Component {
                 icon: "call",
                 pattern: /^\d{10}$/,
                 valid: false,
-                message: "מספר טלפון אינו תקין"
+
             },
             email: {
                 type: "text",
                 placeholder: `דוא"ל`,
                 value: "",
-                icon: "wifi",
+                icon: "at",
                 pattern: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                 valid: false,
-                message: "כתובת מייל אינו תקין"
+
             },
             password: {
                 type: "password",
@@ -62,7 +61,7 @@ class signupCustomer extends Component {
                 icon: "lock",
                 pattern: /^.{8,}/,
                 valid: false,
-                message: "הסיסמה חייבת להכיל לפחות 8 תווים"
+
             }
         }
     }
@@ -72,9 +71,10 @@ class signupCustomer extends Component {
         this.setState({ validFile: false })
         for (var x in this.state.customer) {
             if (!this.state.customer[x].valid) {
-                this.setState({ messages: true })
-                if (this.state.address_from === null)
-                this.setState({messageAddress:"חייב למלא כתובת"})
+                // this.setState({ messages: true })
+                this.setState({
+                    inputClass: "invalid"
+                   })
                 return;
             }
         }
@@ -142,18 +142,18 @@ class signupCustomer extends Component {
         return (
             <div>
                 <SignupForm
+                address={null}
                     stateProps={arr}
                     changed={this.inputChange}
                     submit={this.submit}
                     value="הירשם"
-                    optionCity={this.state.optionCity}
                     changeoption={this.selectoption}
-                    messages={this.state.messages}
-                    messagesAddress={this.state.messageAddress}
                     err={this.props.errMas}
+                  
                     selectoptionfrom={this.selectoptionfrom}
                     loading={this.props.loading}
                     button={false}
+                    inputClass={this.state.inputClass}
                 />
             </div>)
     }

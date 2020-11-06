@@ -1,0 +1,298 @@
+/* .ui center aligned middle aligned grid{
+        top: -6vh;
+        max-width: 450px;
+} */
+
+/* body{
+    /* background-image: url("./images/delivery-man-smiling-holding-cardboard-box_1150-8869.jpg"); */
+    /* background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1.5)), url("../images/delivery-man-smiling-holding-cardboard-box_1150-8869.jpg") ;
+    background-size: cover;
+    background-position-x: center;
+    background-repeat: no-repeat;
+} */ */
+#header{
+    text-align: center;
+ color:#d85d5d
+}
+.ui.form .field .ui.input, .ui.form .fields .field .ui.input, .ui.form .wide.field .ui.input {
+    width: 87% !important;  
+      margin-bottom: 3vw;
+    right: 5vw;
+    margin-right: 1vw;
+}
+.ui.form .field .ui.input input, .ui.form .fields .field .ui.input input {
+  
+    width: 13vw !important;
+}
+
+
+    /* inputs */
+    .ui.form .field .ui.input input, .ui.form .fields .field .ui.input input{
+        text-align: right;
+        border: solid 5;
+        border-color: #bdbcb7;
+        border-radius: 2.7vw; 
+        width: 80%;
+        margin-left: 4vw;
+        /* margin-bottom: 3vw; */
+   
+    }
+
+      .invalid > div>div{
+        border:1px solid #ff0000;
+        border-radius: 3vw;
+        }
+    /* dropdown cars */
+    .ui.fluid.dropdown {
+        display: block;
+        width: auto;
+        height: min-content;
+        margin-left: 8vw;
+        right: 2vw;
+    }
+
+    .ui.search.dropdown > .text{
+        cursor: text;
+        position: relative;
+        right: -4vw;
+        z-index: 3;
+    }
+    .ui.selection.dropdown .menu > .item {
+        right: -6vw;
+        border-top: 1px solid rgb(0, 250, 250);
+        white-space: normal;
+        overflow-wrap: normal;
+        padding: 0.785714rem 1.14286rem !important;
+    }
+    .drop{
+        right: -2vw;
+
+    }
+ 
+  
+
+    ::placeholder {
+        color: red;
+      }
+    .ui.column.grid>[class*="seven wide"].column, .ui.grid>.column.row>[class*="seven wide"].column, .ui.grid>.row>[class*="seven wide"].column, .ui.grid>[class*="seven wide"].column {
+        width: 49.75%!important;
+    }
+    .ui.column.grid > [class*="ten wide"].column, .ui.grid > .column.row > [class*="ten wide"].column, .ui.grid > .row > [class*="ten wide"].column, .ui.grid > [class*="ten wide"].column {
+        width: 49.75% !important;
+    
+    }
+    .way{
+        
+        width: 34vw;
+        margin-right:1vw;    
+
+    }
+    .maxwaylogin{
+        position: absolute;
+        top: 34vw;
+        right: 37vw;
+
+    }
+    .maxwayupdate{
+        position: absolute;
+        top: 19vw;
+        right: 37vw;
+
+    }
+
+  /* submit button */
+  #submit {
+    margin: 1vw;
+    right: 19vw;
+    border: groove;
+    background-color: #e60a0ab3;
+    border-radius: 3vw;
+    height: 8vh;
+    margin-top: 6vw;
+    width: 68vw;
+}
+    /* button img */
+    .ui.button, .ui.buttons .button, .ui.buttons .or {
+        margin: 2vh;
+        margin-left: 2vw;
+        margin-top: 1vh;
+        font-size: 1rem;
+        top: 5vw;
+        right: 9vw;
+        display: grid;
+    }
+
+    .ui.stacked.segment{
+    background-color: #e3e8e896;
+    border-radius: 5vw;}
+    
+    /* grid */
+    .MuiGrid-root {
+        width: 55vw;
+        text-align: center;
+        /* align-items: center; */
+        margin: auto;
+    }
+    .MuiGrid-align-items-xs-center {
+        align-items: center;
+        height: 48vh;
+        margin-top: 8vw;
+    }
+   
+    .ui.grid>.column:not(.row) {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-right: 1.3rem;
+    }
+    .ui.form .field:last-child, .ui.form .fields:last-child .field {
+        margin-bottom: 0px;
+        margin-left: -7vw;
+    }
+  #floor{
+    display: inline-flex;
+    margin-right: -4vw;
+  }
+  #floor > input{
+      width: 50px;
+  }
+
+
+#if_sms{
+    direction: ltr;
+    text-align: end;
+
+}
+#choos_size{
+    text-align: center;
+    margin-bottom: 0vw;
+}
+#sizes{
+    display: flex;
+    /* margin-left: -10vw; */
+    margin-right: 3vw;
+    width: 88vw;
+}
+.sizes{
+    margin-left: 9.5vw;
+    color: #ff21216e;
+    font-size: 11px;
+}
+  .qty{
+    margin-left: 4vw;
+    left: -9vw;
+    width: 106vw;
+    display: table-cell;
+  }
+  /* .ui.form .field .ui.input input, .ui.form .fields .field .ui.input input:-moz-ui-invalid{
+    border: 2px solid red;
+}‏ */
+
+
+/* suitable drivers */
+.drivers{
+    text-align: end;
+    /* border: groove; */
+    border-radius: 14%;
+    background-color: #c5c5c545;
+    margin-bottom: 4vw;
+    font-family: system-ui;
+}
+#open_window_driver{
+    text-align: center;
+    height: 77vh;
+    width: 83vw;
+    position: absolute;
+    overflow-y: scroll;
+    top: 28vw;
+    left: 9vw;
+}
+
+
+/* loading before drivers */
+.ui.segment>.ui.dimmer {
+    margin-top: 34vw;
+    border-radius: inherit!important;
+}
+
+/* name of driver */
+#sut_driver_name{
+    font-size: 20px;
+    color: #b30808;
+    font-family: system-ui;
+    /* font-weight: bold; */
+    margin-right: 26vw;
+}
+.ui.small.modal>.header:not(.ui) {
+    font-size: 1.3em;
+    background-color: #dad8d8;
+}
+
+.inside_sut_drivers{
+    margin-bottom: 2vw;
+    margin-right: 25vw;
+}
+#img_driver{
+    margin-right: 3vw;
+    margin-top: -23vw;
+    margin-bottom: 2vw;
+    border: none;
+    width: 18vw;
+    height: 18vw;
+}
+#button_request{
+    background-color: #0a162d;
+    margin-right: 19vw;
+    border: groove 2px;
+    height: 10vw;
+    color: aliceblue;
+}
+
+
+  #message{
+    margin-top: -5vw;
+    width: 49vw;
+  }
+  /* cars type dropdown */
+  #cartype{
+    border-radius: 2.7vw;
+  
+    margin-right: -1vw;
+    display: block;
+    width: 52%;
+    min-width: 52%;
+    text-align: inherit;
+}
+  /* input:invalid {
+    border-color: red;
+  } */
+  /* .qty :nth-child(2){
+    border-radius: 46%;
+    background-color: #de6565a6;
+  } */
+  /* .qtycircle{ */
+    /* text-align-last: center; */
+    /* align-items: center; */
+    /* align-items: center; */
+    /* position: absolute; */
+    /* width: 8vw;
+    height: 5vh;
+    border-radius: 5vw;
+    background-color: #e69191;
+    display: inline-flex;
+    margin-left: 17vw;
+  }
+  #allqty{
+    position: absolute;
+    top: 3vw;
+    right: 16vw;
+  } */ 
+  
+/* #fromfloor{
+    display: inline-flex;
+    margin-right: -4vw;
+    }
+    #tofloor{
+        display: inline-flex;
+        margin-right: -4vw;
+    } */
+    

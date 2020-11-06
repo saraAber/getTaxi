@@ -1,0 +1,42 @@
+#map_tracking{
+font-size: 29px;
+border: groove;
+top: 74vw;
+right: 3vw;
+height: 50vh;
+width: 94%;
+position: absolute;
+border-radius: 2vw;
+    color: red;
+}
+#msg{
+    font-family: system-ui;
+    color: #d85d5d;
+    text-align: center;
+    margin-top: 3vw;
+    font-size: 19px;
+}
+#track{
+    margin-top: 11vw;
+    margin-left: 2vw;
+}
+#text{
+    font-size: 28px;
+}
+.centerMarker{
+    position:absolute;
+    /*url of the marker*/
+    background:url(http://maps.gstatic.com/mapfiles/markers2/marker.png) no-repeat;
+    /*center the marker*/
+    top:50%;left:50%;
+  
+    z-index:1;
+    /*fix offset when needed*/
+    margin-left:-10px;
+    margin-top:-34px;
+    /*size of the image*/
+    height:34px;
+    width:20px;
+  
+    cursor:pointer;
+  }

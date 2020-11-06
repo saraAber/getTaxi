@@ -1,0 +1,7 @@
+body{
+     /* background-image:  linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1.5)),url("./images/map-with-marked-route_23-2147624233.jpg");  */
+     background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1.5)), url("./images/delivery-man-smiling-holding-cardboard-box_1150-8869.jpg") !important;
+    background-size: cover;
+    background-position-x: center;
+    background-repeat: no-repeat;
+}  
