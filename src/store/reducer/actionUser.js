@@ -13,7 +13,7 @@ export const signupcustomer = (customer) => {
 
         })
             .catch(err => {
-                console.dir(err)
+              //  console.dir(err)
                 if (err.message === "Network Error") {
                     dispatch({ type: error_message, value: "בעיה במערכת, נסה מועד מאוחר יותר" })
                 }
@@ -34,7 +34,7 @@ export const signupdriver = (driver) => {
             dispatch({ type: login, user: Driver })
 
         }).catch(err => {
-                console.dir(err)
+              //  console.dir(err)
                 if (err.message === "Network Error") {
                     dispatch({ type: error_message, value: "בעיה במערכת, נסה מועד מאוחר יותר" })
                 }

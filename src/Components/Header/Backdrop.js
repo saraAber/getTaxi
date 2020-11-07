@@ -10,4 +10,4 @@ import '../../css/Backdrop.css'
     )
   }
 }
-export default Backdrop;
+export default Backdrop
