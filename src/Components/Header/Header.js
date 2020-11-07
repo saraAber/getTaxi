@@ -1,8 +1,8 @@
-import React, { Component,lazy } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { withRouter } from "react-router";
-const SlideDrawer=lazy(()=>{import('./Slide.js')});
+import SlideDrawer from './Slide.js'
 import Backdrop from './Backdrop.js'
 import '../../css/Header.css'
 
