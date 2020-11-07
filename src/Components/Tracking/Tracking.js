@@ -63,8 +63,7 @@ class Tracking extends Component {
   }
 
   render() {
-    {console.log("render")
-  console.log(this.state.center)}
+  
     let icon = <i className="map marker alternate icon"></i>
     return (<div>
       <Header id="header" as='h2' textalign='center'>
