@@ -47,7 +47,7 @@ class Tracking extends Component {
       order_kod: this.state.order_kod
     }
 
-    axios.get(`http://localhost:83/api/MyOrderTrack?Kod=${data.order_kod}`).then(x => {
+    axios.get(`http://78431e0ad4c4.ngrok.io/api/MyOrderTrack?Kod=${data.order_kod}`).then(x => {
       this.setState({ duration: x.data.DurationDestination });
     
       this.setState({ lat: x.data.lat });

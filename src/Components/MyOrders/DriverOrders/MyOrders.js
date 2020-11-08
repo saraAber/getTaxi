@@ -31,7 +31,7 @@ class myorders extends Component {
                         busy: setInterval(x => {
                             driver={ ...this.props.user }
                             if (driver.Dr_Busy) {
-                                axios.put(`http://localhost:83/api/PutUpdateDurationOrder?DriverId=${sessionStorage.getItem("userId")}`).then(x => {
+                                axios.put(`http://78431e0ad4c4.ngrok.io/api/PutUpdateDurationOrder?DriverId=${sessionStorage.getItem("userId")}`).then(x => {
                                 }).catch(x => { this.props.error(x.message) })
                             }
                         }, 10000)
@@ -84,7 +84,7 @@ class myorders extends Component {
 
     //when the driver does not wants the order  he will go and ask for approval from the next driver
     cancel = (IdOrder) => {
-        return axios.put(`http://localhost:83/api/nextDriver?IdDriver=${sessionStorage.getItem("userId")}&IdOrder=${IdOrder}`).then(x => {
+        return axios.put(`http://78431e0ad4c4.ngrok.io/api/nextDriver?IdDriver=${sessionStorage.getItem("userId")}&IdOrder=${IdOrder}`).then(x => {
             this.myorders()
         })
     }
@@ -123,4 +123,4 @@ export default connect(mapStateToProps, mapDispatcToProps)(myorders)
 
 
 
-//http://localhost:83
+//http://78431e0ad4c4.ngrok.io
