@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Rating } from 'semantic-ui-react'
-// import Time from 'react-time';
+import Time from 'react-time';
 import {driversrating,DriverOrder} from '../../../../store/reducer/actionServer/actionServer'
 import '../../../../css/DriverOrders.css';
 class myorder extends Component {
@@ -60,9 +60,9 @@ class myorder extends Component {
       <div className="Customerorders">
    
         <div>  
-        {/* <Time value={this.props.order.Ord_OrderTime} format="DD/MM/YYYY" />    */}
+        <Time value={this.props.order.Ord_OrderTime} format="DD/MM/YYYY" />  
          {"\t\t\t\t\t\t"}
-          {/* <Time value={this.props.order.Ord_OrderTime} format="HH:mm" />  */}
+         <Time value={this.props.order.Ord_OrderTime} format="HH:mm" />
          </div>
         <div><b> איסוף- </b>{this.props.order.Cust_sourceAddress}</div>
         <div><b> מסירה- </b>{this.props.order.Cust_DesAddress} <b> קומה </b>{this.props.order.Cust_getfloor}</div>
