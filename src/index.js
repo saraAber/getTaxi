@@ -9,6 +9,7 @@ import {createStore,combineReducers, applyMiddleware} from 'redux'
 import rootReducer from './store/reducer/reducerUser'
 import reducerOrder from './store/reducer/reducerOrder'
 
+import {unregister} from './serviceWorker'
 const combin=combineReducers({
     user:rootReducer,
     order:reducerOrder
@@ -23,3 +24,4 @@ ReactDOM.render(
     </Provider>,
 document.getElementById('root'));
 
+unregister();
