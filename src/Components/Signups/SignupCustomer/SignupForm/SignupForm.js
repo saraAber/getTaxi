@@ -11,13 +11,10 @@ class signupForm extends Component {
     addressfrom:null,
     flagaddress:false
   }
-  handleClick = () => {
-    if (this.props.IsCorrect)
-      this.setState((prevState) => ({ open: !prevState.open }))
-  }
-  handleClose = () => this.setState({ open: false })
+  //
   componentDidUpdate() {
     if (!this.state.open && this.props.IsCorrect && !this.state.flag) {
+
       this.setState({ open: true,flag: true })
     }
     if(this.props.address!==null&&this.state.addressfrom===null&&!this.state.flagaddress)
@@ -27,6 +24,14 @@ class signupForm extends Component {
   resetaddress=()=>{
     this.setState({addressfrom:null})
   }
+
+  handleClick = () => {
+    if (this.props.IsCorrect)
+      this.setState((prevState) => ({ open: !prevState.open }))
+  }
+  handleClose = () => this.setState({ open: false })
+
+
   render() {
     const { open } = this.state
     let err

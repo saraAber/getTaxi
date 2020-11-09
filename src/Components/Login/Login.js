@@ -44,7 +44,6 @@ class login extends Component {
     
     //Checks all entered data properly
     validation = () => {
-        this.setState({ validFile: false })
         for (var x in this.state.User) {
             if (!this.state.User[x].valid) {
                 this.setState({ messages: true })
@@ -80,7 +79,6 @@ class login extends Component {
             <div>
                 <LoginForm
                     stateProps={arr}
-                    focusout={this.Validation}
                     changed={this.inputChange}
                     submit={this.submit}
                     loading={this.props.loading}

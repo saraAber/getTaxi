@@ -66,6 +66,28 @@ class signupCustomer extends Component {
         }
     }
 
+     //When the user is found and updated in global state he enters order page
+     componentDidUpdate() {
+        if (this.props.user !== null) {
+ 
+            this.props.history.replace(`${this.props.userpath}/order`)
+        }
+    }
+
+      //enter here after all letter and update if its correct
+      inputChange = (event, id) => {
+        const newform = { ...this.state.customer };
+        const formChange = { ...newform[id] };
+        formChange.value = event.target.value;
+        if (formChange.pattern.test(String(formChange.value).toLowerCase())) {
+            formChange.valid = true
+        }
+        else
+            formChange.valid = false
+        newform[id] = formChange;
+        this.setState({ customer: newform })
+    }
+
     //Checks all entered data properly
     validation = () => {
         this.setState({ validFile: false })
@@ -76,12 +98,12 @@ class signupCustomer extends Component {
                     inputClass: "invalid"
                    })
                 return;
+
             }
         }
         if (this.state.address_from !== null){
             this.setState({ messageAddress:"" }
-                , () => {
-                    this.setState({messageAddress:""})
+                , () => {                
                     const data = {
                         Cust_Kod: null,
                         cust_Address: this.state.address_from,
@@ -102,35 +124,19 @@ class signupCustomer extends Component {
         this.setState({messageAddress:"חייב למלא כתובת"})
     }
     //update the address in state
+    
+
     selectoptionfrom = (event, data) => {
         this.setState({ messageAddress:""})
         this.setState({ address_from: event })
     }
-    //enter here after all letter and update if its correct
-    inputChange = (event, id) => {
-        const newform = { ...this.state.customer };
-        const formChange = { ...newform[id] };
-        formChange.value = event.target.value;
-        if (formChange.pattern.test(String(formChange.value).toLowerCase())) {
-            formChange.valid = true
-        }
-        else
-            formChange.valid = false
-        newform[id] = formChange;
-        this.setState({ customer: newform })
-    }
-    //While clicking on signin comes to this function
+  
+    //While clicking on signin  enter this function
     submit = () => {
         this.validation()
     }
 
-    //When the user is found and updated in global state he enters order page
-    componentDidUpdate() {
-        if (this.props.user !== null) {
- 
-            this.props.history.replace(`${this.props.userpath}/order`)
-        }
-    }
+   
 
     render() {
      

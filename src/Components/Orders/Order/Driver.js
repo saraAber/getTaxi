@@ -5,6 +5,7 @@ import '../../../css/Form.css'
 class driver extends Component {
     state = { open: false }
 
+    //when clicking on the request button for a driver
     handleClick = () => {
         const order = { ...this.props.order }
         this.setState((prevState) => ({ open: !prevState.open }))

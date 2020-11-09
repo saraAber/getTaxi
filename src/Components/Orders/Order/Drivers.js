@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 import { error_message } from '../../../store/action'
 import '../../../css/Form.css'
 class ModalExampleTopAligned extends Component {
-  
+
     state = {
         open: false,
         setOpen: false,
@@ -18,20 +18,21 @@ class ModalExampleTopAligned extends Component {
         disabled: false,
         inteval: false
     }
+
+    //initial the status of driver to 1 - order request
     checked = (Id) => {
         const Order = { ...this.props.order };
-        axios.put(`http://78431e0ad4c4.ngrok.io/api/DriverToOrder?IdDriver=${Id}&IdOrder=${Order.Ord_Kod}`).then(x => {
+        axios.put(`http://localhost:50130/api/DriverToOrder?IdDriver=${Id}&IdOrder=${Order.Ord_Kod}`).then(x => {
         })
     }
 
-    component() {
-        this.props.error("")
-       
-    }
+
     show = () => this.setState({ open: true })
     handleConfirm = () => this.setState({ open: false })
     handleCancel = () => this.setState({ open: false }, window.location.reload()
     )
+
+    //check every second if the order is confirmed
     IsOrderConfirmed = () => {
         this.setState({ disabled: true })
         const order = { ...this.props.order }
@@ -42,44 +43,45 @@ class ModalExampleTopAligned extends Component {
         })
 
     }
-componentDidUpdate(){
-    if (this.props.errMas !== "" && this.state.loading !== this.props.errMas) {
-        this.setState({ loading: this.props.errMas })
-        if (this.props.errMas !== "ממתין לאישור נהג")
-            clearInterval(this.state.inteval)
+    //stop checking the status order by clear interval
+    componentDidUpdate() {
+        if (this.props.errMas !== "" && this.state.loading !== this.props.errMas) {
+            this.setState({ loading: this.props.errMas })
+            if (this.props.errMas !== "ממתין לאישור נהג")
+                clearInterval(this.state.inteval)
+        }
     }
-}
     render() {
-       
-        var driver=  <div className="ui segment">
-        <div className="ui active inverted dimmer">
-          <div className="ui text loader">...מחפש נהגים זמינים</div>
-        </div>
-       
-        <p></p>
-      </div>;
+
+        var driver = <div className="ui segment">
+            <div className="ui active inverted dimmer">
+                <div className="ui text loader">...מחפש נהגים זמינים</div>
+            </div>
+
+            <p></p>
+        </div>;
         var Drivers = [];
-    
+        //if there are drivers then create an instance of driver
         if (this.props.allDrivers.length !== 0) {
-            
+
             for (let item in this.props.allDrivers) {
                 Drivers.push({ id: item, config: this.props.allDrivers[item] })
             }
-           
-            driver = Drivers.map(x => <Driver key={x.id} driver={x.config} disabled={this.state.disabled} checked={this.checked} active={this.props.errMas === "ההזמנה אושרה" ? false : true}  value={this.state.loading} orderconfirmed={this.IsOrderConfirmed} />)
-          
+
+            driver = Drivers.map(x => <Driver key={x.id} driver={x.config} disabled={this.state.disabled} checked={this.checked} active={this.props.errMas === "ההזמנה אושרה" ? false : true} value={this.state.loading} orderconfirmed={this.IsOrderConfirmed} />)
+
         }
         else {
-            if(this.props.errMas==="לא נמצאו נהגים מתאימים")
-            driver = this.props.errMas
- 
- 
-         
+            if (this.props.errMas === "לא נמצאו נהגים מתאימים")
+                driver = this.props.errMas
+
+
+
         }
-   
-        
-        
- 
+
+
+
+
         return (
             <div>
                 <Button id="submit" onClick={this.show}>{this.props.value} </Button>

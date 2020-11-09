@@ -102,7 +102,8 @@ class Orders extends Component {
 
     UNSAFE_componentWillMount() {
         this.props.refreshpage(sessionStorage.getItem("userId"))
-        axios.get('http://78431e0ad4c4.ngrok.io/api/Packages').then(x => {
+        //return all  packacages sizes 
+        axios.get('http://localhost:50130/api/Packages').then(x => {
             const data1 = { ...x.data }
             const option1 = []
             for (let x in data1) {
@@ -118,7 +119,7 @@ class Orders extends Component {
 
 
     }
-
+     //initial the address in the state
     selectoptionto = (event, data) => {
         this.setState({ address_to: event }, () => this.validation())
     }
@@ -126,7 +127,7 @@ class Orders extends Component {
         this.setState({ address_from: event }, () => this.validation())
     }
 
-
+  //Checks all entered data properly
     validation = () => {
         for (var x in this.state.orders) {
             if (!this.state.orders[x].valid) {
@@ -138,6 +139,7 @@ class Orders extends Component {
         }
     }
 
+  //enter here after all letter
     inputChange = (event, id) => {
         const newform = { ...this.state.orders };
         const formChange = { ...newform[id] };
@@ -156,7 +158,7 @@ class Orders extends Component {
 
     }
 
-
+//calculate order price
     calculateprice = () => {
         const data = {
             Ord_Kod: null,
@@ -192,6 +194,7 @@ class Orders extends Component {
 
     }
 
+    //While clicking on order enter  this function
     submit = () => {
 
         if (this.state.price !== "הזמן משלוח") {
@@ -206,6 +209,8 @@ class Orders extends Component {
             })
         }
     }
+
+    //change the text button  to price order
     componentDidUpdate() {
         if (this.props.order != null) {
             if (this.state.price === "הזמן משלוח") {
@@ -216,6 +221,7 @@ class Orders extends Component {
         }
 
         if (this.props.customer && this.state.address_from === null) {
+            //reset the address and the floor
             const address = this.props.customer.Cust_Address
             const order = this.state.orders
             order.from_floor.value = this.props.customer.Cust_Floor

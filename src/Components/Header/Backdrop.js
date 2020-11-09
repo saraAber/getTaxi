@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../css/Backdrop.css'
- class Backdrop extends React.Component {
+export default class Backdrop extends React.Component {
   render(){
     return(
       <div
@@ -10,4 +10,3 @@ import '../../css/Backdrop.css'
     )
   }
 }
-export default Backdrop

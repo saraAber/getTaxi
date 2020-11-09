@@ -60,9 +60,26 @@ class signinCustomer extends Component {
     }
 
     UNSAFE_componentWillMount() {
+        //when tha page is refreshed the state is initialized
         this.props.refreshpage(sessionStorage.getItem("userId"))
 
     }
+    //reset data
+    componentDidUpdate() {
+        if (this.state.updateUser === false) {
+            let customer = this.state.customer
+            const user = { ...this.props.user }
+            customer.lastName.value = user.Cust_LastName
+            customer.password.value = user.Cust_Password
+            customer.phone.value = user.Cust_PhoneNumber
+            customer.floor.value = user.Cust_Floor
+            customer.email.value = user.Cust_Email
+            this.setState({ customer: customer })
+            this.setState({ updateUser: true })
+            this.setState({ address_from: user.Cust_Address })
+        }
+    }
+
     //Checks all entered data properly
     validation = () => {
         this.setState({ validFile: false })
@@ -100,7 +117,7 @@ class signinCustomer extends Component {
         newform[id] = formChange;
         this.setState({ customer: newform });
     }
-    //While clicking on update comes to this function
+    //While clicking on update enter  this function
     submit = () => {
         this.validation()
     }
@@ -109,22 +126,7 @@ class signinCustomer extends Component {
         this.setState({ address_from: event })
         this.setState({ messageAddress: "" })
     }
-    //reset data
-    componentDidUpdate() {
-        if (this.state.updateUser === false) {
-            let customer = this.state.customer
-            const user = { ...this.props.user }
-            customer.lastName.value = user.Cust_LastName
-            customer.password.value = user.Cust_Password
-            customer.phone.value = user.Cust_PhoneNumber
-            customer.floor.value = user.Cust_Floor
-            customer.email.value = user.Cust_Email
-            this.setState({ customer: customer })
-            this.setState({ updateUser: true })
-            this.setState({ address_from: user.Cust_Address })
-        }
-    }
-
+    
     render() {
 
         const arr = [];

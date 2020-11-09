@@ -4,7 +4,7 @@ import axios from 'axios'
 
 //return list of cars type
 export function GetCarsType() {
-  return axios.get('http://78431e0ad4c4.ngrok.io/api/Cars').then(x => {
+  return axios.get('http://localhost:50130/api/Cars').then(x => {
     const data = { ...x.data }
     const option = []
     for (let x in data) {
@@ -26,7 +26,7 @@ export function GetCarsType() {
 //update duration of destination in order
 export function UpdateDurationOrder(id) {
  
-  return axios.put(`http://78431e0ad4c4.ngrok.io/api/PutUpdateDurationOrder?DriverId=${sessionStorage.getItem("userId")}`).then(x => {
+  return axios.put(`http://localhost:50130/api/PutUpdateDurationOrder?DriverId=${sessionStorage.getItem("userId")}`).then(x => {
  
 }).catch(err => {
     if (err.message === "Network Error") {
@@ -40,7 +40,7 @@ export function UpdateDurationOrder(id) {
 
 //Returns all orders placed by the customer
 export function AllOrders() {
-  return axios.get(`http://78431e0ad4c4.ngrok.io/api/order?Id=${sessionStorage.getItem('userId')}`).then(x => {
+  return axios.get(`http://localhost:50130/api/order?Id=${sessionStorage.getItem('userId')}`).then(x => {
     const data = { ...x.data }
     let neworders = []
     let orders = []
@@ -65,7 +65,7 @@ export function AllOrders() {
 
 //Updates the driver's rating by a customer to order
 export const driversrating = (Ord_Kod, rating) => {
-  return axios.put(`http://78431e0ad4c4.ngrok.io/api/UpdateRating?IdOrder=${Ord_Kod}&num=${rating}`).then(x => {
+  return axios.put(`http://localhost:50130/api/UpdateRating?IdOrder=${Ord_Kod}&num=${rating}`).then(x => {
     return
   }).catch(err => {
     if (err.message === "Network Error") {
@@ -80,7 +80,7 @@ export const driversrating = (Ord_Kod, rating) => {
 
 //Returns driver for each order and update the state
 export function DriverOrder(Ord_Id_driver) {
-  return axios.get(`http://78431e0ad4c4.ngrok.io/api/driver?Id=${Ord_Id_driver}`).then(x => {
+  return axios.get(`http://localhost:50130/api/driver?Id=${Ord_Id_driver}`).then(x => {
     const data = { ...x.data }
     return data;
   })
@@ -88,7 +88,7 @@ export function DriverOrder(Ord_Id_driver) {
 
 //Returns customer for each order and update the state
 export function CustomerOrder(Cust_send) {
-  return axios.get(`http://78431e0ad4c4.ngrok.io/api/customer?Id=${Cust_send}`).then(x => {
+  return axios.get(`http://localhost:50130/api/customer?Id=${Cust_send}`).then(x => {
     const data = { ...x.data }
     return data;
   })
@@ -98,7 +98,7 @@ export function CustomerOrder(Cust_send) {
 
 //update status of order
 export const StatusOrder = (order) => {
-  return axios.put('http://78431e0ad4c4.ngrok.io/api/order', order).then(x => {
+  return axios.put('http://localhost:50130/api/order', order).then(x => {
     const data = { ...x.data }
     return data;
   }).catch(err => {
@@ -114,7 +114,7 @@ export const StatusOrder = (order) => {
 
 //Returns all orders placed by driver
 export function AllOrdersByDrivers() {
-  return axios.get(`http://78431e0ad4c4.ngrok.io/api/DriverToOrder?IdDriver=${sessionStorage.getItem("userId")}`).then(x => {
+  return axios.get(`http://localhost:50130/api/DriverToOrder?IdDriver=${sessionStorage.getItem("userId")}`).then(x => {
     const data = { ...x.data }
     let neworders = []
     let orders = []

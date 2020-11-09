@@ -93,6 +93,10 @@ class updateDriver extends Component {
     }
 
   }
+  //stop the inteval
+  componentWillUnmount() {
+    clearInterval(this.state.busy)
+  }
 
 
   componentDidUpdate() {
@@ -101,11 +105,7 @@ class updateDriver extends Component {
     const driver = { ...this.props.user }
 
     if (this.state.valuestatus !== driver.Dr_Status) {
-
-
       this.setState({ valuestatus: driver.Dr_Status })
-
-      // this.state.valuestatus = driver.Dr_Status
     }
     if (driver) {
       //if stattus active update location driver
@@ -125,170 +125,173 @@ class updateDriver extends Component {
               }
               else {
                 //else-update if there is an order request     
-                    axios.get(`http://78431e0ad4c4.ngrok.io/api/DriverToOrder?IdDriver=${sessionStorage.getItem("userId")}`).then(x => {
-                      const orders = [...x.data]
-                      for (var item in orders) {
-                        if (orders[item].Ord_Stattus === 1) {
-                          toast.success("שלום מחכה לך הזמנה ");    
-                          clearInterval(this.state.notbusy)  
-                          break;
-                        }
-                      }
-                    }).catch(error => {
-                    })               
+                axios.get(`http://localhost:50130/api/DriverToOrder?IdDriver=${sessionStorage.getItem("userId")}`).then(x => {
+                  const orders = [...x.data]
+                  for (var item in orders) {
+                    if (orders[item].Ord_Stattus === 1) {
+                      toast.success("שלום מחכה לך הזמנה ");
+                      clearInterval(this.state.notbusy)
+                      break;
+                    }
+                  }
+                }).catch(error => {
+                })
               }
             }, 10000)
-          })  
-        this.setState({ visited: true })
+          })
+          this.setState({ visited: true })
+        }
+        
+      }
+      else {
+        //stop the inteval
+        clearInterval(this.state.busy)
+
       }
     }
+
+
+  }
+  // reset data
+  resetdata = () => {
+    if (this.state.update === false) {
+
+      let driver = this.state.Driver
+      const user = { ...this.props.user }
+      driver.lastName.value = user.Dr_LastName
+      driver.password.value = user.Dr_Password
+      driver.phone.value = user.Dr_Phone_number
+      driver.email.value = user.Dr_Email
+      driver.minway.value = user.Dr_MinWay
+      driver.maxway.value = user.Dr_MaxWay
+
+      this.setState({ Driver: driver, update: true })
+    }
+
   }
 
+  // A function that updates a current location
+  // getCurrentLocation() {
+  //   if (navigator.geolocation) {
+  //        navigator.geolocation.watchPosition(position => {
+  //         const lat = position.coords.latitude;
+  //         const lon = position.coords.longitude;
+  //           alert(lat + ',' + lon);
+  //         console.log("Driver");
+  //        axios.post(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyD-escEShizSjF9I3GdoO35gMtEuto0FmA
+  //       `).then(x => {
+  //         alert(JSON.stringify(x))
+  //        }).catch(x => {
+  //          alert("not good")
+  //        });
+  //       }, (err)=>{}, {
+  //           enableHighAccuracy: true,
+  //           maximumAge: 3000,
+  //           timeout: 3000
+  //       });
+  //   }
+  // }
 
-}
-// reset data
-resetdata = () => {
-  if (this.state.update === false) {
-
-    let driver = this.state.Driver
-    const user = { ...this.props.user }
-    driver.lastName.value = user.Dr_LastName
-    driver.password.value = user.Dr_Password
-    driver.phone.value = user.Dr_Phone_number
-    driver.email.value = user.Dr_Email
-    driver.minway.value = user.Dr_MinWay
-    driver.maxway.value = user.Dr_MaxWay
-
-    this.setState({ Driver: driver, update: true })
+  //update in state the type car
+  selectoption = (event, data) => {
+    this.setState({ CarType: data.value })
+    this.setState({ messageCarType: "" })
   }
 
-}
-//stop the inteval
-componentWillUnmount() {
-  clearInterval(this.state.busy)
-}
-// A function that updates a current location
-// getCurrentLocation() {
-//   if (navigator.geolocation) {
-//        navigator.geolocation.watchPosition(position => {
-//         const lat = position.coords.latitude;
-//         const lon = position.coords.longitude;
-//           alert(lat + ',' + lon);
-//         console.log("Driver");
-//        axios.post(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyD-escEShizSjF9I3GdoO35gMtEuto0FmA
-//       `).then(x => {
-//         alert(JSON.stringify(x))
-//        }).catch(x => {
-//          alert("not good")
-//        });
-//       }, (err)=>{}, {
-//           enableHighAccuracy: true,
-//           maximumAge: 3000,
-//           timeout: 3000
-//       });
-//   }
-// }
-
-//update in state the type car
-selectoption = (event, data) => {
-  this.setState({ CarType: data.value })
-  this.setState({ messageCarType: "" })
-}
-
-//update stattus driver on click
-toggle = () => {
-  this.props.changestatus(this.props.user);
-  this.setState({ valuestatus: !this.state.valuestatus });
-}
-//enter here after all letter
-inputChange = (event, id) => {
-  const newform = { ...this.state.Driver };
-  const formChange = { ...newform[id] };
-  formChange.value = event.target.value;
-  if (formChange.pattern.test(String(formChange.value).toLowerCase())) {
-    formChange.valid = true
+  //update stattus driver on click
+  toggle = () => {
+    this.props.changestatus(this.props.user);
+    this.setState({ valuestatus: !this.state.valuestatus });
   }
-  else
-    formChange.valid = false
-  newform[id] = formChange;
-  this.setState({ Driver: newform });
-}
+  //enter here after all letter
+  inputChange = (event, id) => {
+    const newform = { ...this.state.Driver };
+    const formChange = { ...newform[id] };
+    formChange.value = event.target.value;
+    if (formChange.pattern.test(String(formChange.value).toLowerCase())) {
+      formChange.valid = true
+    }
+    else
+      formChange.valid = false
+    newform[id] = formChange;
+    this.setState({ Driver: newform });
+  }
 
-//Checks all entered data properly
-validation = () => {
-  for (var x in this.state.Driver) {
-    if (!this.state.Driver[x].valid) {
-      this.setState({
-        inputClass: "invalid"
+  //Checks all entered data properly
+  validation = () => {
+    for (var x in this.state.Driver) {
+      if (!this.state.Driver[x].valid) {
+        this.setState({
+          inputClass: "invalid"
+        })
+
+        // this.setState({ messages: true })
+        if (this.state.CarType === null)
+          this.setState({ messageCarType: "חייב לבחור כלי רכב" })
+        return;
+      }
+    }
+    if (this.state.CarType !== null) {
+      this.setState({ messageCarType: "" }, () => {
+        const data = {
+          Dr_Id: this.props.user.Dr_Id,
+          Dr_LastName: this.state.Driver.lastName.value,
+          Dr_Phone_number: this.state.Driver.phone.value,
+          Dr_CarType_kod: this.state.CarType,
+          Dr_Password: this.state.Driver.password.value,
+          Dr_MaxWay: this.state.Driver.maxway.value,
+          Dr_MinWay: this.state.Driver.minway.value,
+          Dr_Token: this.props.src === "" ? this.props.user.Dr_Token : this.props.src,
+        }
+        this.props.update(data)
+        this.setState({ IsCorrect: true })
+
+
       })
-
-      // this.setState({ messages: true })
-      if (this.state.CarType === null)
-        this.setState({ messageCarType: "חייב לבחור כלי רכב" })
-      return;
+    }
+    else {
+      this.setState({ messageCarType: "חייב לבחור כלי רכב" })
     }
   }
-  if (this.state.CarType !== null) {
-    this.setState({ messageCarType: "" }, () => {
-      const data = {
-        Dr_Id: this.props.user.Dr_Id,
-        Dr_LastName: this.state.Driver.lastName.value,
-        Dr_Phone_number: this.state.Driver.phone.value,
-        Dr_CarType_kod: this.state.CarType,
-        Dr_Password: this.state.Driver.password.value,
-        Dr_MaxWay: this.state.Driver.maxway.value,
-        Dr_MinWay: this.state.Driver.minway.value,
-        Dr_Token: this.props.src === "" ? this.props.user.Dr_Token : this.props.src,
-      }
-      this.props.update(data)
-      this.setState({ IsCorrect: true })
 
 
-    })
+  //update details of driver
+  submit = () => {
+    this.validation()
   }
-  else {
-    this.setState({ messageCarType: "חייב לבחור כלי רכב" })
-  }
-}
+
+  render() {
+
+    const arr = [];
+    for (let x in this.state.Driver) {
+      arr.push({ id: x, config: this.state.Driver[x] })
+    }
+    return (
+      <div>
+        <div id="status">
+          <div>סטטוס</div>
+          <Radio toggle checked={this.state.valuestatus} onChange={this.toggle} />
+        </div>
+        <Update
+          stateProps={arr}
+          changed={this.inputChange}
+          submit={this.submit}
+          optionCars={this.state.optionCars}
+          changeoption={this.selectoption}
+          loading={this.props.loading}
+          error={this.props.errMas}
+          button={true}
+          IsCorrect={this.state.IsCorrect}
+          value="עדכון פרטים"
+          inputClass={this.state.inputClass}
+          Showpicture={true}
+          srcimage={this.props.user ? this.props.user.Dr_Token : ""}
+        />
 
 
-//update details of driver
-submit = () => {
-  this.validation()
-}
-
-render() {
-
-  const arr = [];
-  for (let x in this.state.Driver) {
-    arr.push({ id: x, config: this.state.Driver[x] })
-  }
-  return (
-    <div>
-      <div id="status">
-        <div>סטטוס</div>
-        <Radio toggle checked={this.state.valuestatus} onChange={this.toggle} />
       </div>
-      <Update
-        stateProps={arr}
-        changed={this.inputChange}
-        submit={this.submit}
-        optionCars={this.state.optionCars}
-        changeoption={this.selectoption}
-        loading={this.props.loading}
-        error={this.props.errMas}
-        button={true}
-        IsCorrect={this.state.IsCorrect}
-        value="עדכון פרטים"
-        inputClass={this.state.inputClass}
-        Showpicture={true}
-        srcimage={this.props.user ? this.props.user.Dr_Token : ""}
-      />
-
-
-    </div>
-  )
-}
+    )
+  }
 }
 const mapDispatcToProps = dispatch => {
   return {

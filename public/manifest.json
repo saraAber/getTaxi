@@ -1,6 +1,6 @@
 {
-  "short_name": "get Taxi",
-  "name": "get Taxi",
+  "short_name": "Get Taxi",
+  "name": "Get Driver",
   "icons": [
     {
       "src": "favicon.ico",

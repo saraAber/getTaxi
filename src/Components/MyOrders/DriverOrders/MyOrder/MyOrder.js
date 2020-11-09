@@ -20,7 +20,7 @@ class myorder extends Component {
         CustomerOrder(order.Cust_send).then(x => {
 
             this.setState({
-                pointCustomer: x.Cust_Points>20?5:x.Cust_Points>10?4:x.Cust_Points,
+                pointCustomer: x.Cust_Points>5?5:x.Cust_Points,
                 nameCustomer: x.Cust_FirstName + " " + x.Cust_LastName,
                 phoneCustomer: x.Cust_PhoneNumber,
                 floorCustomer: x.Cust_Floor

@@ -30,7 +30,7 @@ class Tracking extends Component {
       lat: 32.087220,
       lng: 34.844680
     },
-    zoom: 17
+    zoom: 15
   };
   
   //update the state in the value
@@ -47,7 +47,7 @@ class Tracking extends Component {
       order_kod: this.state.order_kod
     }
 
-    axios.get(`http://78431e0ad4c4.ngrok.io/api/MyOrderTrack?Kod=${data.order_kod}`).then(x => {
+    axios.get(`http://localhost:50130/api/MyOrderTrack?Kod=${data.order_kod}`).then(x => {
       this.setState({ duration: x.data.DurationDestination });
     
       this.setState({ lat: x.data.lat });
@@ -63,7 +63,8 @@ class Tracking extends Component {
   }
 
   render() {
-  
+    {console.log("render")
+  console.log(this.state.center)}
     let icon = <i className="map marker alternate icon"></i>
     return (<div>
       <Header id="header" as='h2' textalign='center'>

@@ -94,6 +94,14 @@ class signupDriver extends Component {
         })
 
     }
+
+      //When the user is found and updated in global state he enters update page
+      componentDidUpdate() {
+        const url = this.props.userpath
+        if (this.props.user !== null) {
+            this.props.history.replace(`${url}/update`)
+        }
+    }
     //Checks all entered data properly
     validation = () => {
         this.setState({ validFile: false })
@@ -139,17 +147,11 @@ class signupDriver extends Component {
             this.setState({ messageCar: "חייב לבחור כלי רכב" })
           
     }
-    //While clicking on signin comes to this function
+    //While clicking on signin  enter this function
     submit = () => {
         this.validation()
     }
-    //When the user is found and updated in global state he enters order page
-    componentDidUpdate() {
-        const url = this.props.userpath
-        if (this.props.user !== null) {
-            this.props.history.replace(`${url}/update`)
-        }
-    }
+  
     //enter here after all letter and update if its correct
     inputChange = (event, id) => {
         const newform = { ...this.state.Driver };
@@ -173,10 +175,7 @@ class signupDriver extends Component {
     }
       //update the src image
       srcimage = (event, data) => {
-        
-
-        this.setState({ src: event })
-     
+        this.setState({ src: event })   
     }
     render() {
         const arr = [];
@@ -190,7 +189,7 @@ class signupDriver extends Component {
                     stateProps={arr}
                     changed={this.inputChange}
                     submit={this.submit}
-                    value="הירשם כנהג"
+                    value="הירשם"
                     optionCars={this.state.optionCars}
                     changeoption={this.selectoption}
                     loading={this.props.loading}

@@ -4,7 +4,7 @@ import { login, userpath, loading, error_message, logout } from '../action'
 export const signupcustomer = (customer) => {
     return dispatch => {
         dispatch({ type: loading })
-        axios.post('http://78431e0ad4c4.ngrok.io/api/customer', customer).then(x => {
+        axios.post('http://localhost:50130/api/customer', customer).then(x => {
 
             const Customer = { ...x.data }
             localStorage.setItem("UserType", "customer")
@@ -13,7 +13,7 @@ export const signupcustomer = (customer) => {
 
         })
             .catch(err => {
-              //  console.dir(err)
+                console.dir(err)
                 if (err.message === "Network Error") {
                     dispatch({ type: error_message, value: "בעיה במערכת, נסה מועד מאוחר יותר" })
                 }
@@ -27,14 +27,14 @@ export const signupcustomer = (customer) => {
 export const signupdriver = (driver) => {
     return dispatch => {
         dispatch({ type: loading })
-        axios.post('http://78431e0ad4c4.ngrok.io/api/driver', driver).then(x => {
+        axios.post('http://localhost:50130/api/driver', driver).then(x => {
             const Driver = { ...x.data }
             localStorage.setItem("UserType", "driver")
             sessionStorage.setItem('userId', Driver.Dr_Id)
             dispatch({ type: login, user: Driver })
 
         }).catch(err => {
-              //  console.dir(err)
+                console.dir(err)
                 if (err.message === "Network Error") {
                     dispatch({ type: error_message, value: "בעיה במערכת, נסה מועד מאוחר יותר" })
                 }
@@ -49,7 +49,7 @@ export const loginuser = (password, name, type) => {
     return dispatch => {
         dispatch({ type: loading })
         if (type === "/customer") {
-            axios.get(`http://78431e0ad4c4.ngrok.io/api/customer?Password=${password}&Email=${name}`).then(x => {
+            axios.get(`http://localhost:50130/api/customer?Password=${password}&Email=${name}`).then(x => {
                 const Customer = { ...x.data }
                 sessionStorage.setItem('userId', Customer.Cust_Kod)
                 localStorage.setItem("UserType", "customer")
@@ -65,7 +65,7 @@ export const loginuser = (password, name, type) => {
                 })
         }
         else {
-            axios.get(`http://78431e0ad4c4.ngrok.io/api/driver?Password=${password}&Email=${name}`).then(x => {
+            axios.get(`http://localhost:50130/api/driver?Password=${password}&Email=${name}`).then(x => {
                 const Driver = { ...x.data }
 
                 sessionStorage.setItem('userId', Driver.Dr_Id)
@@ -93,7 +93,7 @@ export const pathuser = (user) => {
 export const updatedriver = (newdriver) => {
     return dispatch => {
         dispatch({ type: loading })
-        axios.put('http://78431e0ad4c4.ngrok.io/api/driver', newdriver).then(x => {
+        axios.put('http://localhost:50130/api/driver', newdriver).then(x => {
             const Driver = { ...x.data }
             dispatch({ type: login, user: Driver })
         }).catch(err => {
@@ -109,7 +109,7 @@ export const updatedriver = (newdriver) => {
 export const updatecustomer = (customer) => {
     return dispatch => {
         dispatch({ type: loading })
-        axios.put('http://78431e0ad4c4.ngrok.io/api/customer', customer).then(x => {
+        axios.put('http://localhost:50130/api/customer', customer).then(x => {
             const Customer = { ...x.data }
             dispatch({ type: login, user: Customer })
         }).catch(err => {
@@ -124,7 +124,7 @@ export const updatecustomer = (customer) => {
 }
 export const updatestatus = (driver) => {
     return dispatch => {
-        axios.put(`http://78431e0ad4c4.ngrok.io/api/driver?Id=${driver.Dr_Id}`).then(x => {
+        axios.put(`http://localhost:50130/api/driver?Id=${driver.Dr_Id}`).then(x => {
             const Driver = { ...x.data }
             dispatch({ type: login, user: Driver })
         }).catch(x => {
@@ -142,7 +142,7 @@ export const leave = () => {
 
 export const refreshcustomer = (Id) => {
     return dispatch => {
-        axios.get(`http://78431e0ad4c4.ngrok.io/api/customer?Id=${Id}`).then(x => {
+        axios.get(`http://localhost:50130/api/customer?Id=${Id}`).then(x => {
             const Customer = { ...x.data }
             dispatch({ type: login, user: Customer })
         })
@@ -151,17 +151,17 @@ export const refreshcustomer = (Id) => {
 
 export const refreshdriver = (Id) => {
     return dispatch => {
-        axios.get(`http://78431e0ad4c4.ngrok.io/api/driver?Id=${Id}`).then(x => {
+        axios.get(`http://localhost:50130/api/driver?Id=${Id}`).then(x => {
             const Driver = { ...x.data }
             dispatch({ type: login, user: Driver })
         })
     }
 }
-//update busy driver 
+//update busy driver     
 
 export const ChangeBusyDriver = () => {
     return dispatch => {
-         axios.put(`http://78431e0ad4c4.ngrok.io/api/putbusydriver?kodDriver=${sessionStorage.getItem("userId")}`).then(x => {
+         axios.put(`http://localhost:50130/api/putbusydriver?kodDriver=${sessionStorage.getItem("userId")}`).then(x => {
             const driver= {...x.data}
             dispatch({ type: login, user: driver })
             
